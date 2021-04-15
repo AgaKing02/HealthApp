@@ -14,7 +14,6 @@ import java.time.Duration
 class MainActivity : AppCompatActivity() {
     var mProgressBar: ProgressBar? = null
     var mCountDownTimer: CountDownTimer? = null
-    var startButton:Button?=null
     var textView: TextView? = null
     var i = 100
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,18 +32,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                startButton!!.text = "Finished"
+                textView!!.text=0.toString()
                 i=100
             }
         }
-        startButton!!.setOnClickListener{
             mCountDownTimer!!.start()
-        }
+
     }
 
     fun setUp() {
         textView = findViewById(R.id.text_view_progress)
-        startButton=findViewById(R.id.button)
         mProgressBar = findViewById(R.id.progress_bar)
         mProgressBar!!.setProgress(i)
         textView!!.text= (i/10).toString();

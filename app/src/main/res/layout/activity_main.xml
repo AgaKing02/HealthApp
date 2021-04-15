@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:src="@drawable/main" />
+        android:background="@drawable/main" />
 
     <Button
         android:id="@+id/button"
