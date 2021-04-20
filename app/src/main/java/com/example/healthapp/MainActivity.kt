@@ -7,6 +7,7 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+    //main comment
     var mProgressBar: ProgressBar? = null
     var textView: TextView? = null
     var image: ImageView? = null
