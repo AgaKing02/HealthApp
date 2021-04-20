@@ -14,6 +14,7 @@ class Exercise(
     val interval: Int = ((100000 / millisInFuture).toInt());
     var nextExercise: Exercise? = null
     var overAll: Int = 100;
+    //comments
 
 
     override fun onTick(millisUntilFinished: Long) {
