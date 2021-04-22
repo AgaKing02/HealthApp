@@ -1,6 +1,9 @@
 package com.example.healthapp
 
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
@@ -12,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     var textView: TextView? = null
     var image: ImageView? = null
     var i = 100
+    var mediaPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 image?.let { it2 ->
                     Exercise(
                         30000, 1000, it, it1,
-                        it2,R.drawable.ic_push_up
+                        it2, R.drawable.ic_push_up
                     )
                 }
             }
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 image?.let { it2 ->
                     Exercise(
                         10000, 1000, it, it1,
-                        it2,null
+                        it2, null
                     )
                 }
             }
@@ -46,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 image?.let { it2 ->
                     Exercise(
                         30000, 1000, it, it1,
-                        it2,R.drawable.ic_jumping_jacks
+                        it2, R.drawable.ic_jumping_jacks
                     )
                 }
             }
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 image?.let { it2 ->
                     Exercise(
                         10000, 1000, it, it1,
-                        it2,null
+                        it2, null
                     )
                 }
             }
@@ -69,14 +74,42 @@ class MainActivity : AppCompatActivity() {
                 image?.let { it2 ->
                     Exercise(
                         30000, 1000, it, it1,
-                        it2,R.drawable.ic_abdominal_crunch
+                        it2, R.drawable.ic_abdominal_crunch
                     )
                 }
             }
         }
+        val player = object : CountDownTimer(110000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
 
+                if (millisUntilFinished <= 80000L && millisUntilFinished >= 70000L) {
+                    Log.d("is in 1", millisUntilFinished.toString())
+                    if (!mediaPlayer!!.isPlaying)
+                        mediaPlayer!!.start()
+                } else if (millisUntilFinished <= 40000L && millisUntilFinished >= 30000L) {
+                    Log.d("is in 2", millisUntilFinished.toString())
+                    if (!mediaPlayer!!.isPlaying)
+                        mediaPlayer!!.start()
+                } else {
+                    if (mediaPlayer!!.isPlaying)
+                        mediaPlayer!!.pause()
+                }
+
+
+            }
+
+            override fun onFinish() {
+               mediaPlayer!!.release()
+            }
+
+        }
         setUpActivities(Arrays.asList(first, firstRest, second, secondRest, third))
         first!!.startWithImage()
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.press_start)
+        mediaPlayer!!.isLooping = true
+        player.start()
+
 
 
     }
@@ -96,5 +129,8 @@ class MainActivity : AppCompatActivity() {
         image = findViewById(R.id.picture)
         mProgressBar!!.setProgress(i)
         textView!!.text = (i / 10).toString();
+
+
+
     }
 }
